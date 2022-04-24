@@ -22,17 +22,18 @@ def hello():
         no response
     """
     return 'Hello World!'
+
 @app.route('/search',methods=['POST','GET'])
 def search():
     if request.method == 'POST':
         data = request.get_data()
         data = data.split(b',')[1]
         file = uuid.uuid1()
-        filename = f"Datasets/CUFSF/{file}.jpg"
-        print(f"filename:{filename}")
+        filename = f"{file}.jpg"
+        print(f"Temp File Path:{filename}")
         with open(filename,"wb") as img:
             img.write(base64.b64decode(data))
-        with os.popen(f"cd  DVG-Face && python eval.py --input {file}") as pipe:
+        with os.popen(f"cd ../DVG-Face && python eval.py --input {file}") as pipe:
             number = "{:0>5d}".format(int(pipe.read()))
         # pipe = os.popen(f"cd  DVG-Face && python eval.py --input {file}")
         # number = int(pipe.read())
@@ -41,8 +42,10 @@ def search():
         os.remove(filename)
         # call functions
         return f"static/lib/{number}.jpg"
+        # return f"../Datasets/CUFSF-CAGAN/photos/{number}.jpg"
     else:
         return "API:search"
+
 @app.route('/sketch',methods=['POST','GET'])
 def sketch():
     if request.method == 'POST':
@@ -56,5 +59,6 @@ def sketch():
         return "static/00.jpg"
     else:
         return "API:sketch"
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5001,debug=True)
