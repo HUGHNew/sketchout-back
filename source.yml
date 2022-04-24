@@ -1,0 +1,102 @@
+configuration:
+  title: 素查 API
+  description: 素查API文档
+  uri: http://ali.hughnash.top:5001
+
+categories:
+  Frontend:
+    description: for frontend usage
+  Test:
+    description: for test usage
+    
+versions:
+  v0.9:
+    status: deprecated
+    major: 0
+    minor: 9
+    label: 内部版本
+    methods:
+      Test_Root:
+        category: Test
+        label: /
+        description: 测试服务器是否在线接口
+        category: Test
+        response_body:
+          type: string
+          sample: 'Hello,World!'
+      img:
+        category: Frontend
+        uri: /img
+        description: 数据预处理的echo服务API
+        request_body:
+          type: object
+          description: 图片的base64编码格式
+          properties:
+            data:
+              type: string
+              sample: "ZmRzZw==..."
+        request_headers:
+          Accept:
+            type: mimeType
+            description: 指定类型为图片
+            sample: application/json
+            optional: false
+        response_body:
+          type: object
+          description: 图片的base64编码格式
+          properties:
+            data:
+              type: string
+              sample: "ZmRzZw==..."
+    types:
+      mimeType:
+        item:
+          type: string
+          sample: image/png
+        format:
+          pretty: type/sous-type
+    
+  v1.0:
+    status: current
+    major: 1
+    minor: 0
+    label: 正式版
+    extends: v0.9
+    methods:
+      img:
+        inherit: false
+        removed: true
+      API_Sketch:
+        label: sketch
+        description: 获取根据素描生成的画像。前端发送一张素描图片，后端根据该图片生成推理的真人画像
+        category: Frontend
+        request_body:
+          type: object
+          description: 图片的base64编码格式
+          properties:
+            data:
+              type: string
+              sample: "ZmRzZw==..."
+        request_headers:
+          Accept:
+            type: mimeType
+            description: 指定类型为图片
+            sample: application/json
+            optional: false
+        response_body:
+          type: object
+          description: 图片的base64编码格式
+          properties:
+            data:
+              type: string
+              sample: "ZmRzZw==..."
+      API_Search:
+        label: search
+        extends: API_Sketch
+    types:
+      mimeType:
+        item:
+          type: string
+          sample: image/png
+        format:
+          pretty: type/sous-type

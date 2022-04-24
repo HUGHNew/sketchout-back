@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "apidoc": "^0.51.1"
+  },
+  "scripts": {
+    "build":"apidoc -i . -o static/"
+  }
+}

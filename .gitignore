@@ -1,0 +1,17 @@
+# models
+node_modules
+CA-GAN
+DVG-Face
+UseModels
+Datasets
+static
+
+uwsgi.*
+!uwsgi.ini
+
+*.gz
+*.tar
+*.zip
+*.tgz
+
+default.conf
