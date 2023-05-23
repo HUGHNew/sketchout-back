@@ -5,6 +5,7 @@ DVG-Face
 UseModels
 Datasets
 static
+sketch_temp
 
 uwsgi.*
 !uwsgi.ini
