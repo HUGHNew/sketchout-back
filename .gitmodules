@@ -1,0 +1,3 @@
+[submodule "MyGanNet"]
+	path = MyGanNet
+	url = https://github.com/Char1sk/MyGanNet.git
